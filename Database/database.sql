@@ -1,0 +1,45 @@
+CREATE DATABASE cinema;
+CREATE TABLE genero
+(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	imagen VARCHAR(225) NULL DEFAULT NULL
+);
+CREATE TABLE  personaje
+(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	imagen VARCHAR(225) NULL DEFAULT NULL,
+	nombre VARCHAR(100) NOT NULL,
+	edad INT NOT NULL,
+	peso DECIMAL(5,2),
+	historia VARCHAR(225) NULL DEFAULT NULL
+);
+CREATE TABLE serie
+(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	titulo VACHAR(100) NOT NULL,
+	fecha_creacion  DATE NOT NULL DEFAULT CURRENT_DATE,
+	calificacion TINYINT NOT NULL
+);
+CREATE TABLE genero
+(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(100) NOT NULL,
+	imagen VARCHAR(225) NULL DEFAULT NULL
+);
+CREATE TABLE serie_x_personaje
+(
+	id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	serie_id INT NOT NULL,
+	personaje_id INT NOT NULL,
+	CONSTRAINT fk_serie_x_personaje_serie_id FOREIGN KEY(serie_id) REFERENCES serie(id),
+	CONSTRAINT fk_serie_x_personaje_personaje_id FOREIGN KEY(personaje_id) REFERENCES personaje(id)
+);
+CREATE TABLE genero_x_serie
+(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	genero_id INT NOT NULL,
+	serie_id INT NOT NULL,
+	CONSTRAINT fk_genero_x_serie_genero_id FOREIGN KEY(genero_id) REFERENCES genero(id),
+	CONSTRAINT fk_genero_x_serie_serie_id FOREIGN KEY(serie_id) REFERENCES serie(id)
+);
